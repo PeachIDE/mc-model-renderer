@@ -4,7 +4,7 @@ import com.github.mouse0w0.mmr.graphics.Renderer;
 
 import java.lang.management.ManagementFactory;
 
-public class ModelRenderer {
+public class Main {
     public static void main(String[] args) {
         System.out.println(ManagementFactory.getRuntimeMXBean().getName());
         new Renderer().run();

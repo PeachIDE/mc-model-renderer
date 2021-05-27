@@ -2,7 +2,7 @@ package com.github.mouse0w0.mmr.graphics;
 
 import com.github.mouse0w0.minecraft.model.McModel;
 import com.github.mouse0w0.minecraft.model.McModelHelper;
-import com.github.mouse0w0.mmr.McModelBakery;
+import com.github.mouse0w0.mmr.ModelBakery;
 import com.github.mouse0w0.mmr.TextureMap;
 import com.github.mouse0w0.mmr.image.BufferedImage;
 import com.github.mouse0w0.mmr.window.GLFWHelper;
@@ -70,7 +70,7 @@ public class Renderer {
             TextureMap textureMap = TextureMap.builder().texture("blocks/rail_normal",
                     BufferedImage.load(Paths.get("resource\\rail_normal.png"))).build();
             texture = new Texture2D(textureMap.getImage());
-            McModelBakery.bake(model, textureMap::getTexCoord, buf);
+            ModelBakery.bake(model, textureMap::getTexCoord, buf);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }

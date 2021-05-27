@@ -12,7 +12,7 @@ import org.joml.Vector4f;
 import java.util.Map;
 import java.util.function.Function;
 
-public final class McModelBakery {
+public final class ModelBakery {
 
     private static final Matrix4f IDENTIFY = new Matrix4f();
 
