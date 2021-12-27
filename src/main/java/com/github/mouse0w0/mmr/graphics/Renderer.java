@@ -8,7 +8,6 @@ import com.github.mouse0w0.mmr.image.BufferedImage;
 import com.github.mouse0w0.mmr.window.GLFWHelper;
 import com.github.mouse0w0.mmr.window.GLFWWindow;
 import org.apache.commons.io.IOUtils;
-import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
 
@@ -24,14 +23,8 @@ import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
 
 public class Renderer {
     private GLFWWindow window;
-
-    private float fov = (float) Math.toRadians(60);
-    private float zNear = 0.01f;
-    private float zFar = 1000f;
-
     private ShaderProgram program;
-
-    private Matrix4f projMatrix = new Matrix4f();
+    private Viewport viewport;
     private Camera camera;
 
     private Mesh mesh;
@@ -49,6 +42,8 @@ public class Renderer {
 
         GL.createCapabilities();
         glClearColor(0f, 0f, 0f, 0f);
+
+        viewport = new PerspectiveViewport();
 
         camera = new FocusCamera(new Vector3f(0.5f, 0, 0.5f));
         camera.bindWindow(window);
@@ -94,11 +89,11 @@ public class Renderer {
 
             if (window.isResized()) {
                 glViewport(0, 0, window.getWidth(), window.getHeight());
-                projMatrix.identity().perspective(fov, (float) window.getWidth() / window.getHeight(), zNear, zFar);
+                viewport.resize(window.getWidth(), window.getHeight());
             }
 
             program.bind();
-            program.setUniform("projMatrix", projMatrix);
+            program.setUniform("projMatrix", viewport.getProjMatrix());
             program.setUniform("viewMatrix", camera.getViewMatrix());
 
             glEnable(GL_CULL_FACE);
