@@ -2,7 +2,7 @@ package com.github.mouse0w0.mmr.graphics;
 
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL30C.*;
 
 public class VertexBuffer {
     private int id;

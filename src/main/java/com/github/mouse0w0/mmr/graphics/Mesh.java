@@ -1,6 +1,6 @@
 package com.github.mouse0w0.mmr.graphics;
 
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL30C.*;
 
 public class Mesh {
     private final int id;

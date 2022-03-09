@@ -17,9 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL30C.*;
 
 public class Renderer {
     private GLFWWindow window;

@@ -3,7 +3,7 @@ package com.github.mouse0w0.mmr.graphics;
 import org.joml.Matrix4fc;
 import org.lwjgl.system.MemoryStack;
 
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30C.*;
 
 public class ShaderProgram {
     private final int id;
