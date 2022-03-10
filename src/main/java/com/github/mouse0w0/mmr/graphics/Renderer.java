@@ -39,7 +39,7 @@ public class Renderer {
         window.show();
 
         GL.createCapabilities();
-        glClearColor(0f, 0f, 0f, 0f);
+        glClearColor(0f, 0f, 0f, 1f);
 
         viewport = new PerspectiveViewport();
 
