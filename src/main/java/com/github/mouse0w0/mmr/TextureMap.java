@@ -59,7 +59,6 @@ public class TextureMap {
                 texCoords.put(entry.getKey(), uv);
                 texMap.setImage(x, y, image);
                 x += width;
-                y += height;
             }
 
             return new TextureMap(texMap, texCoords);

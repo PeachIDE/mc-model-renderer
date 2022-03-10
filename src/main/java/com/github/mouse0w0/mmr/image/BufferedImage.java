@@ -74,9 +74,9 @@ public class BufferedImage {
     private BufferedImage(ByteBuffer pixelBuffer, int width, int height, boolean copy) {
         this.width = width;
         this.height = height;
-        this.stride = width * Integer.BYTES;
+        this.stride = width << 2;
         this.pixelBuffer = copy ? (ByteBuffer) allocateDirect(pixelBuffer.capacity()).put(pixelBuffer).flip() : pixelBuffer;
-        this.address = memAddress(this.pixelBuffer);
+        this.address = memAddress0(this.pixelBuffer);
     }
 
     public int getWidth() {
@@ -118,15 +118,14 @@ public class BufferedImage {
     }
 
     public void setImage(int x, int y, ByteBuffer src, int srcWidth, int srcHeight, int srcMinX, int srcMinY, int srcMaxX, int srcMaxY) {
-        final int srcLineBytes = srcWidth << 2;
-        final int srcLineOffset = srcMinX << 2;
-        final int dstLineOffset = x << 2;
-        final int copyRegionLineBytes = (srcMaxX - srcMinX) << 2;
-        final long srcAddress = memAddress(src, 0);
+        final int srcOffset = srcMinX << 2;
+        final int dstOffset = x << 2;
+        final long srcAddress = memAddress0(src) + srcOffset;
+        final long dstAddress = address + dstOffset;
+        final int srcStride = srcWidth << 2;
+        final int bytes = (srcMaxX - srcMinX) << 2;
         for (int srcY = srcMinY, dstY = y; srcY < srcMaxY; srcY++, dstY++) {
-            memCopy(srcAddress + srcY * srcLineBytes + srcLineOffset,
-                    address + dstY * stride + dstLineOffset,
-                    copyRegionLineBytes);
+            memCopy(srcAddress + srcY * srcStride, dstAddress + dstY * stride, bytes);
         }
     }
 

@@ -59,9 +59,10 @@ public class Renderer {
         buf.begin((3 + 4 + 2) * Float.BYTES);
 
         try {
-            McModel model = McModelHelper.load(Paths.get("resource\\rail_flat.json"));
-            TextureMap textureMap = TextureMap.builder().texture("blocks/rail_normal",
-                    BufferedImage.load(Paths.get("resource\\rail_normal.png"))).build();
+            McModel model = McModelHelper.load(Paths.get("resource\\rail.json"));
+            TextureMap textureMap = TextureMap.builder()
+                    .texture("block/rail", BufferedImage.load(Paths.get("resource\\rail.png")))
+                    .texture("block/rail_wood", BufferedImage.load(Paths.get("resource\\rail_wood.png"))).build();
             texture = new Texture2D(textureMap.getImage());
             ModelBakery.bake(model, textureMap::getTexCoord, buf);
         } catch (IOException e) {
