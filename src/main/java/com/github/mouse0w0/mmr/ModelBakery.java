@@ -157,8 +157,7 @@ public final class ModelBakery {
     }
 
     private static float normalizeTexCoord(float value) {
-        float result = value / 16f;
-        return (float) (result - Math.floor(result));
+        return value / 16f;
     }
 
     private static float lerp(float value, float min, float max) {
