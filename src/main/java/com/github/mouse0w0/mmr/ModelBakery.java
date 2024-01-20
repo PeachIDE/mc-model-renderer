@@ -49,24 +49,25 @@ public final class ModelBakery {
     private static void bakeFace(McFacing facing, McFace face, Map<String, String> textures, Vector3f[] boxPoints, Function<String, Vector4f> uvGetter, BufferBuilder buf) {
         Vector4f texCoord = createTexCoord(face, textures, uvGetter);
         Vector4f color = getFaceColor(facing);
-        int[] indices = VERTEX_DATA_INDICES[facing.ordinal()];
+        int[] posIndices = VERTEX_DATA_INDICES[facing.ordinal()];
+        int[] texCoordIndices;
+        switch (face.getRotation()) {
+            default:
+                texCoordIndices = TEX_COORDS_INDICES;
+                break;
+            case 90:
+                texCoordIndices = TEX_COORDS_90_INDICES;
+                break;
+            case 180:
+                texCoordIndices = TEX_COORDS_180_INDICES;
+                break;
+            case 270:
+                texCoordIndices = TEX_COORDS_270_INDICES;
+                break;
+        }
         for (int i = 0; i < 6; i++) {
-            buf.pos(boxPoints[indices[i]]).color(color);
-
-            switch (face.getRotation()) {
-                case 90:
-                    texCoord(texCoord, TEX_COORDS_90_INDICES[i], buf);
-                    break;
-                case 180:
-                    texCoord(texCoord, TEX_COORDS_180_INDICES[i], buf);
-                    break;
-                case 270:
-                    texCoord(texCoord, TEX_COORDS_270_INDICES[i], buf);
-                    break;
-                default:
-                    texCoord(texCoord, TEX_COORDS_INDICES[i], buf);
-                    break;
-            }
+            buf.pos(boxPoints[posIndices[i]]).color(color);
+            texCoord(texCoord, texCoordIndices[i], buf);
         }
     }
 
