@@ -7,7 +7,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class GLFWWindow {
-    private long pointer;
+    private long handle;
 
     private int width;
     private int height;
@@ -29,30 +29,30 @@ public class GLFWWindow {
     private void initialize() {
         GLFWHelper.initialize();
 
-        pointer = glfwCreateWindow(width, height, title, NULL, NULL);
-        if (pointer == NULL)
+        handle = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (handle == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
 
-        glfwMakeContextCurrent(pointer);
+        glfwMakeContextCurrent(handle);
 
         initCallbacks();
         centerOnScreen();
     }
 
     private void initCallbacks() {
-        glfwSetKeyCallback(pointer, (pointer, key, scancode, action, mods) -> {
+        glfwSetKeyCallback(handle, (pointer, key, scancode, action, mods) -> {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
                 glfwSetWindowShouldClose(pointer, true);
         });
-        glfwSetWindowSizeCallback(pointer, (pointer, w, h) -> {
+        glfwSetWindowSizeCallback(handle, (pointer, w, h) -> {
             width = w;
             height = h;
             resized = true;
         });
     }
 
-    public long getPointer() {
-        return pointer;
+    public long getHandle() {
+        return handle;
     }
 
     public int getWidth() {
@@ -64,7 +64,7 @@ public class GLFWWindow {
     }
 
     public void setSize(int width, int height) {
-        glfwSetWindowSize(pointer, width, height);
+        glfwSetWindowSize(handle, width, height);
     }
 
     public String getTitle() {
@@ -79,27 +79,27 @@ public class GLFWWindow {
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
         glfwSetWindowPos(
-                pointer,
+                handle,
                 (vidMode.width() - width) / 2,
                 (vidMode.height() - height) / 2
         );
     }
 
     public void show() {
-        glfwShowWindow(pointer);
+        glfwShowWindow(handle);
     }
 
     public boolean shouldClose() {
-        return glfwWindowShouldClose(pointer);
+        return glfwWindowShouldClose(handle);
     }
 
     public void swapBuffers() {
-        glfwSwapBuffers(pointer);
+        glfwSwapBuffers(handle);
         if (resized) resized = false;
     }
 
     public void dispose() {
-        glfwFreeCallbacks(pointer);
-        glfwDestroyWindow(pointer);
+        glfwFreeCallbacks(handle);
+        glfwDestroyWindow(handle);
     }
 }

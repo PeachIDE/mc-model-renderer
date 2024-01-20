@@ -38,7 +38,7 @@ public class FocusCamera implements Camera {
 
     @Override
     public void bindWindow(GLFWWindow window) {
-        glfwSetMouseButtonCallback(window.getPointer(), (pointer, button, action, mods) -> {
+        glfwSetMouseButtonCallback(window.getHandle(), (pointer, button, action, mods) -> {
             if (button == GLFW_MOUSE_BUTTON_1) {
                 if (action == GLFW_PRESS) {
                     lastCursorX = Double.NaN;
@@ -47,7 +47,7 @@ public class FocusCamera implements Camera {
                 rotating = action != GLFW_RELEASE;
             }
         });
-        glfwSetCursorPosCallback(window.getPointer(), (pointer, x, y) -> {
+        glfwSetCursorPosCallback(window.getHandle(), (pointer, x, y) -> {
             if (rotating) {
                 if (Double.isNaN(lastCursorX)) lastCursorX = x;
                 if (Double.isNaN(lastCursorY)) lastCursorY = y;
@@ -60,7 +60,7 @@ public class FocusCamera implements Camera {
                 yaw += deltaCursorX * mouseSensitivity;
             }
         });
-        glfwSetScrollCallback(window.getPointer(), (pointer, x, y) -> {
+        glfwSetScrollCallback(window.getHandle(), (pointer, x, y) -> {
             distance = Math.min(Math.max(distance - y * mouseSensitivity, 0), 3);
         });
     }
