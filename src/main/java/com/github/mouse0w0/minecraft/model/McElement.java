@@ -23,7 +23,7 @@ public class McElement {
         private Vector3f origin;
         private McAxis axis;
         private float angle;
-        private boolean rescale = false;
+        private boolean rescale;
 
         public Rotation() {
         }
