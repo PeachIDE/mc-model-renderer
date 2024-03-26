@@ -6,7 +6,7 @@ plugins {
 group 'com.github.mouse0w0'
 version '1.0.0'
 
-sourceCompatibility = targetCompatibility = 1.8
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 compileJava.options.encoding = "UTF-8"
 
 project.ext.lwjglVersion = "3.2.3"
@@ -30,19 +30,19 @@ repositories {
 }
 
 dependencies {
-    compile "org.lwjgl:lwjgl:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl-stb:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl-glfw:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl-opengl:$lwjglVersion"
     runtimeOnly "org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-glfw:$lwjglVersion:$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives"
 
-    compile 'org.joml:joml:1.10.2'
-    compile 'org.joml:joml-primitives:1.10.0'
-    compile 'com.google.code.gson:gson:2.8.9'
-    compile 'commons-io:commons-io:2.11.0'
+    implementation 'org.joml:joml:1.10.2'
+    implementation 'org.joml:joml-primitives:1.10.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'commons-io:commons-io:2.11.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
