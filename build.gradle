@@ -9,7 +9,7 @@ version '1.0.0'
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 compileJava.options.encoding = "UTF-8"
 
-project.ext.lwjglVersion = "3.2.3"
+project.ext.lwjglVersion = "3.3.3"
 
 import org.gradle.internal.os.OperatingSystem
 switch (OperatingSystem.current()) {
