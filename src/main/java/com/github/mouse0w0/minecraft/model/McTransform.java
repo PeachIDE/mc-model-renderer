@@ -10,10 +10,11 @@ import java.util.Objects;
 
 @JsonAdapter(McTransform.Serializer.class)
 public class McTransform {
-
     public static final Vector3f TRANSLATION_DEFAULT = new Vector3f(0.0F, 0.0F, 0.0F);
     public static final Vector3f ROTATION_DEFAULT = new Vector3f(0.0F, 0.0F, 0.0F);
     public static final Vector3f SCALE_DEFAULT = new Vector3f(1.0F, 1.0F, 1.0F);
+
+    private static final float TO_RADIANS = (float) (Math.PI / 180.0);
 
     private Vector3f translation;
     private Vector3f rotation;
@@ -59,9 +60,9 @@ public class McTransform {
 
     public Matrix4f getMatrix(Matrix4f dest) {
         return dest.identity()
-                .rotateX((float) Math.toRadians(rotation.x()))
-                .rotateY((float) Math.toRadians(rotation.y()))
-                .rotateZ((float) Math.toRadians(rotation.z()))
+                .rotateX(rotation.x() * TO_RADIANS)
+                .rotateY(rotation.y() * TO_RADIANS)
+                .rotateZ(rotation.z() * TO_RADIANS)
                 .translate(translation)
                 .scale(scale);
     }
