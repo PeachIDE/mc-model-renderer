@@ -25,7 +25,7 @@ public class Renderer2D {
     private ShaderProgram program;
 
     private Matrix4f projMatrix = new Matrix4f().ortho(0f, 16f, 0f, 16f, -1000f, 1000f);
-    private Matrix4f viewMatrix = new Matrix4f().translate(15f, 4f, 0f).scale(16f, 16f, 16f);
+    private Matrix4f viewMatrix = new Matrix4f().translate(8f, 8f, 0f).scale(16f, 16f, 16f);
 
     private Mesh mesh;
     private Texture2D texture;
@@ -88,12 +88,13 @@ public class Renderer2D {
 
             program.bind();
             program.setUniform("projMatrix", projMatrix);
-//            program.setUniform("viewMatrix", viewMatrix);
+            //            program.setUniform("viewMatrix", viewMatrix);
             program.setUniform("viewMatrix",
                     new Matrix4f(viewMatrix).mul(new Matrix4f()
                             .rotateX((float) Math.toRadians(30))
                             .rotateY((float) Math.toRadians(225))
-                            .scale(0.625f, 0.625f, 0.625f)));
+                            .scale(0.625f, 0.625f, 0.625f)
+                            .translate(-0.5f, -0.5f, -0.5f)));
 
             glEnable(GL_CULL_FACE);
             glEnable(GL_DEPTH_TEST);
