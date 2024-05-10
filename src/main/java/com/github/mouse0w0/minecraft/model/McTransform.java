@@ -63,8 +63,8 @@ public class McTransform {
                 .rotateX(rotation.x() * TO_RADIANS)
                 .rotateY(rotation.y() * TO_RADIANS)
                 .rotateZ(rotation.z() * TO_RADIANS)
-                .translate(translation)
-                .scale(scale);
+                .scale(scale)
+                .translate(translation);
     }
 
     @Override
